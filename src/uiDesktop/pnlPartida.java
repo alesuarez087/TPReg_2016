@@ -50,6 +50,7 @@ public class pnlPartida extends JPanel {
 	private JSpinner spnAtaque_1;
 	private JLabel lblPersonajeTurno;
 	private JLabel lblAtaqueBloqueado;
+	private JButton btnAbandonarPartida;
 
 	/**
 	 * Create the panel.
@@ -179,7 +180,7 @@ public class pnlPartida extends JPanel {
 			}
 		});
 		btnFinalDePartida.setEnabled(false);
-		btnFinalDePartida.setBounds(169, 242, 113, 23);
+		btnFinalDePartida.setBounds(155, 242, 140, 23);
 		add(btnFinalDePartida);
 		
 		JLabel lblElTurnoCorresponde = new JLabel("El turno corresponde a:");
@@ -187,7 +188,6 @@ public class pnlPartida extends JPanel {
 		add(lblElTurnoCorresponde);
 		
 		lblPersonajeTurno = new JLabel("New label");
-//		lblPersonajeTurno.setText(ctrl.getAtaca().toString());
 		lblPersonajeTurno.setBounds(225, 152, 46, 14);
 		add(lblPersonajeTurno);
 		
@@ -196,6 +196,17 @@ public class pnlPartida extends JPanel {
 		lblAtaqueBloqueado.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAtaqueBloqueado.setBounds(37, 183, 371, 14);
 		add(lblAtaqueBloqueado);
+		
+		btnAbandonarPartida = new JButton("Abandonar Partida");
+		btnAbandonarPartida.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				abandonar();
+			}
+		});
+		btnAbandonarPartida.setVerticalAlignment(SwingConstants.TOP);
+		btnAbandonarPartida.setBounds(155, 276, 140, 23);
+		add(btnAbandonarPartida);
 		
 		lblAtaqueBloqueado.setVisible(false);
 		
@@ -227,6 +238,7 @@ public class pnlPartida extends JPanel {
 		spnAtaque_1.setEnabled(false);
 		spnAtaque_2.setEnabled(false);
 		btnFinalDePartida.setEnabled(true);
+		btnAbandonarPartida.setEnabled(false);
 	}
 	
 	private void actualizarPartida(){
@@ -288,6 +300,13 @@ public class pnlPartida extends JPanel {
 	}
 	
 	 private void cierre(){
-		frmPrincipal.showPanel(frmPrincipal.PANEL_OPCION);
+		frmMenu.showPanel(frmMenu.PANEL_OPCION);
+	 }
+	 
+	 private void abandonar(){
+		 int c = JOptionPane.showConfirmDialog(null, "Atencíon, desde eliminar el contenido ?");
+			if(JOptionPane.OK_OPTION == c){
+				cierre();
+			}
 	 }
 }

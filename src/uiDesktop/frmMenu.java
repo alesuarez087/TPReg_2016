@@ -3,12 +3,10 @@ package uiDesktop;
 import java.awt.CardLayout;
 import java.awt.Container;
 import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 
-public class frmPrincipal extends JFrame {
-	
-	private static final long serialVersionUID = 1L;
-	
+public class frmMenu {
 	
 	final static String PANEL_OPCION = "Panel Opcion";
 	final static String PANEL_EDITOR = "Panel Editor";
@@ -23,7 +21,7 @@ public class frmPrincipal extends JFrame {
 	
 	private JFrame form;
 	
-	private static frmPrincipal window;
+	private static frmMenu window;
 
 	public static void showPanel(String nombrePanel){
 		Container cp = window.form.getContentPane();
@@ -45,6 +43,8 @@ public class frmPrincipal extends JFrame {
 	public static pnlSeleccion getPanelSeleccion(){
 		return window.panelSeleccion;
 	}
+	
+
 	/**
 	 * Launch the application.
 	 */
@@ -52,7 +52,7 @@ public class frmPrincipal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					window = new frmPrincipal();
+					window = new frmMenu();
 					window.form.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -62,20 +62,27 @@ public class frmPrincipal extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Create the application.
 	 */
-	public frmPrincipal() {
-		form = new JFrame();
-		form.setTitle("TP Java 2016");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		card = new CardLayout(0, 0);
+	public frmMenu() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		form = new JFrame("TP Java 2016");
+		form.setBounds(100, 100, 474, 376);
+		form.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		card=new CardLayout(0, 0);
 		form.getContentPane().setLayout(card);
 		
 		panelOpcion = new pnlOpcion();
 		panelEditor = new pnlEditor();
 		panelSeleccion = new pnlSeleccion();
 		panelPartida = new pnlPartida();
+		
 		form.getContentPane().add(panelOpcion, PANEL_OPCION);
 		form.getContentPane().add(panelEditor, PANEL_EDITOR);
 		form.getContentPane().add(panelSeleccion, PANEL_SELECCION);

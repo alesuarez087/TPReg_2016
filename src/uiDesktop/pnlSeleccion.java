@@ -246,11 +246,11 @@ public class pnlSeleccion extends JPanel {
 	}
 	
 	private void turnos(){
-		frmPrincipal.getPanelPartida().iniciaPartida(personaje_1, personaje_2);
-		frmPrincipal.showPanel(frmPrincipal.PANEL_PARTIDA);
+		frmMenu.getPanelPartida().iniciaPartida(personaje_1, personaje_2);
+		frmMenu.showPanel(frmMenu.PANEL_PARTIDA);
 	}
 	
 	private void atras(){
-		frmPrincipal.showPanel(frmPrincipal.PANEL_OPCION);
+		frmMenu.showPanel(frmMenu.PANEL_OPCION);
 	}
 }

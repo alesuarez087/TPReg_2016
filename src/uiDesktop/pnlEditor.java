@@ -263,6 +263,6 @@ public class pnlEditor extends JPanel {
 	}
 
 	private void atras(){
-		frmPrincipal.showPanel(frmPrincipal.PANEL_OPCION);
+		frmMenu.showPanel(frmMenu.PANEL_OPCION);
 	}
 }

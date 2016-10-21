@@ -37,10 +37,10 @@ public class pnlOpcion extends JPanel {
 
 	
 	public void partida(){
-		frmPrincipal.showPanel(frmPrincipal.PANEL_SELECCION);
+		frmMenu.showPanel(frmMenu.PANEL_SELECCION);
 	}
 	
 	public void editor(){
-		frmPrincipal.showPanel(frmPrincipal.PANEL_EDITOR);
+		frmMenu.showPanel(frmMenu.PANEL_EDITOR);
 	}
 }
