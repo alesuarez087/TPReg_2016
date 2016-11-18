@@ -1,5 +1,7 @@
 package logic;
 
+import javax.swing.JOptionPane;
+
 import entities.Personaje;
 import utils.ApplicationException;
 
@@ -41,9 +43,10 @@ public class ControladorPartida extends Controlador{
 		return ataca;
 	}
 	
-	public void atacar(int ataque) throws ApplicationException{
+	public boolean atacar(int ataque) throws ApplicationException{
 		if(ataque>ataca.getEnergiaRestante()){
-			throw new ApplicationException("Los puntos de Ataque son mayor a la Energía Restante");
+			JOptionPane.showMessageDialog(null, "Los puntos de Ataque ingresado son superiores a la Energía Restante !\nReintente");
+			return false;
 		} else{
 			ataca.realizarAtaque(ataque);
 			recibe.recibirAtaque(ataque);
@@ -54,6 +57,7 @@ public class ControladorPartida extends Controlador{
 			} else{
 				this.cambiarTurno();
 			}
+			return true;
 		}
 	}
 	

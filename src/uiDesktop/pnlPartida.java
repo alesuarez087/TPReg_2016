@@ -8,11 +8,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import entities.Personaje;
 import logic.ControladorPartida;
 import utils.ApplicationException;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 public class pnlPartida extends JPanel {
 
@@ -107,6 +110,7 @@ public class pnlPartida extends JPanel {
 		//150
 		
 		spnAtaque_1 = new JSpinner();
+		spnAtaque_1.setModel(new SpinnerNumberModel(0, 0, 0, 1));
 		spnAtaque_1.setEnabled(false);
 		spnAtaque_1.setBounds(105, 60, 45, 20);
 		add(spnAtaque_1);
@@ -136,6 +140,7 @@ public class pnlPartida extends JPanel {
 		spnAtaque_2.setEnabled(false);
 		spnAtaque_2.setBounds(295, 60, 45, 20);
 		add(spnAtaque_2);
+
 		
 		txtEnergia_2 = new JTextField();
 		txtEnergia_2.setEditable(false);
@@ -214,22 +219,27 @@ public class pnlPartida extends JPanel {
 
 	private void atacar(){
 		int pto;
-		if((ctrl.getJugador_1()).equals(ctrl.getTurno())){
-			pto = (int)this.spnAtaque_1.getValue();
-		} else{
-			pto = (int)this.spnAtaque_2.getValue();
-		}
-		try {
-			ctrl.atacar(pto);
-			actualizarPartida();
-			if(ctrl.getFin()){
-				JOptionPane.showMessageDialog(this, ctrl.getTurno().getNombre() + " ha ganado la partida");
-				finalPartida();
+		boolean v = true;
+		do{
+			if((ctrl.getJugador_1()).equals(ctrl.getTurno())){
+				pto = (int)this.spnAtaque_1.getValue();
+			} else{
+				pto = (int)this.spnAtaque_2.getValue();
 			}
-		} catch (ApplicationException e) {
-			JOptionPane.showMessageDialog(this, e.getMessage());
+			try {
+				if(ctrl.atacar(pto)){
+						v = false;
+					}
+				}
+			catch (ApplicationException e) {
+				JOptionPane.showMessageDialog(this, e.getMessage());
+			} 
+		} while(v);
+		if(ctrl.getFin()){
+			JOptionPane.showMessageDialog(this, ctrl.getTurno().getNombre() + " ha ganado la partida");
+			finalPartida();
 		}
-		
+		actualizarPartida();
 	}
 	
 	private void finalPartida(){
@@ -241,12 +251,13 @@ public class pnlPartida extends JPanel {
 		btnAbandonarPartida.setEnabled(false);
 	}
 	
-	private void actualizarPartida(){
+	private void actualizarPartida(){ 
 		Personaje p1 = ctrl.getJugador_1();
 		this.lblPersonaje_1.setText(p1.getNombre());
 		this.txtVida_1.setText(Integer.toString(p1.getVidaRestante()));
 		this.txtEnergia_1.setText(Integer.toString(p1.getEnergiaRestante()));
 		this.txtDefensa_1.setText(Integer.toString(p1.getDefensa()));
+		
 		
 		Personaje p2 = ctrl.getJugador_2();
 		this.lblPersonaje_2.setText(p2.getNombre());

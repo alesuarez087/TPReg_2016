@@ -21,8 +21,8 @@ public class Personaje {
 	private int defensa;
 	private int energia;
 	
-	private int danio;
-	private int desgaste;
+	private int danio=0;
+	private int desgaste=0;
 	
 	public int getId() {
 		return id;
@@ -113,8 +113,8 @@ public class Personaje {
 	public boolean evade(){
 		boolean evade = false;
 		Random r = new Random();
-		int nro = ((int)r.nextDouble())*100;
-		if(nro<evasion) evade=true;
+		double nro = r.nextDouble()*100;
+		if(nro<evasion) {evade=true;}
 		return evade;
 	}
 	
